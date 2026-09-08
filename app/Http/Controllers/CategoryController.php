@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    private array $categories = [
+        ['id' => 1, 'nama_kategori' => 'Fiksi', 'deskripsi' => 'Buku cerita rekaan seperti novel dan kumpulan cerpen.'],
+        ['id' => 2, 'nama_kategori' => 'Teknologi', 'deskripsi' => 'Buku seputar teknologi, pemrograman, dan ilmu komputer.'],
+        ['id' => 3, 'nama_kategori' => 'Sejarah', 'deskripsi' => 'Buku bertema sejarah dan biografi tokoh.'],
+    ];
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return 'CategoryController@index';
+        $categories = $this->categories;
+
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -19,15 +28,18 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return 'CategoryController@create';
+        return view('categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        return 'CategoryController@store';
+        $validated = $request->validated();
+
+        return redirect()->route('categories.index')
+            ->with('success', "Kategori \"{$validated['nama_kategori']}\" berhasil ditambahkan (data dummy, belum tersimpan ke database).");
     }
 
     /**
@@ -36,7 +48,7 @@ class CategoryController extends Controller
 
     public function edit(string $id)
     {
-        return 'CategoryController@edit';
+        return "CategoryController@edit, id: {$id}";
     }
 
     /**
@@ -44,7 +56,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return 'CategoryController@update';
+        return "CategoryController@update, id: {$id}";
     }
 
     /**
@@ -52,6 +64,6 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        return 'CategoryController@destroy';
+        return "CategoryController@destroy, id: {$id}";
     }
 }
