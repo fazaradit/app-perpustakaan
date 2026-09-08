@@ -2,16 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMemberRequest;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
+    private array $members = [
+        [
+            'id' => 1,
+            'nama' => 'Fieza Rausyan Al Ghifari',
+            'nim' => '3125600001',
+            'email' => 'fieza.ghifari@example.com',
+            'nomor_telepon' => '081234567890',
+            'alamat' => 'Jl. Merdeka No. 10, Jakarta',
+            'status' => 'aktif',
+        ],
+        [
+            'id' => 2,
+            'nama' => 'Reyvan Andhika',
+            'nim' => '3125600025',
+            'email' => 'reyvan.andhika@example.com',
+            'nomor_telepon' => '082345678901',
+            'alamat' => 'Jl. Sudirman No. 45, Bandung',
+            'status' => 'aktif',
+        ],
+        [
+            'id' => 3,
+            'nama' => 'Radityarma Naufal Fazani',
+            'nim' => '3125600008',
+            'email' => 'radityarma.naufal@example.com',
+            'nomor_telepon' => '083456789012',
+            'alamat' => 'Jl. Diponegoro No. 8, Surabaya',
+            'status' => 'nonaktif',
+        ],
+    ];
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return 'MemberController@index';
+        $members = $this->members;
+
+        return view('members.index', compact('members'));
     }
 
     /**
@@ -19,15 +52,18 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return 'MemberController@create';
+        return view('members.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMemberRequest $request)
     {
-        return 'MemberController@store';
+        $validated = $request->validated();
+
+        return redirect()->route('members.index')
+            ->with('success', "Anggota \"{$validated['nama']}\" berhasil ditambahkan (data dummy, belum tersimpan ke database).");
     }
 
     /**
@@ -35,7 +71,7 @@ class MemberController extends Controller
      */
     public function show(string $id)
     {
-        return 'MemberController@show';
+        return "MemberController@show, id: {$id}";
     }
 
     /**
@@ -43,7 +79,7 @@ class MemberController extends Controller
      */
     public function edit(string $id)
     {
-        return 'MemberController@edit';
+        return "MemberController@edit, id: {$id}";
     }
 
     /**
@@ -51,7 +87,7 @@ class MemberController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return 'MemberController@update';
+        return "MemberController@update, id: {$id}";
     }
 
     /**
@@ -59,6 +95,6 @@ class MemberController extends Controller
      */
     public function destroy(string $id)
     {
-        return 'MemberController@destroy';
+        return "MemberController@destroy, id: {$id}";
     }
 }
