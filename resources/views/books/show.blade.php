@@ -17,6 +17,10 @@
 
     <table>
         <tr>
+        <th>ID Kategori</th>
+            <td>{{ $book['category_id'] }}</td>
+</tr>
+        <tr>
             <th>Judul</th>
             <td>{{ $book['judul'] }}</td>
         </tr>
