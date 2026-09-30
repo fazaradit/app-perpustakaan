@@ -12,7 +12,7 @@ class BookController extends Controller
 
     public function index()
 {
-    $books = Book::paginate(10);
+    $books = Book::with('category')->paginate(10);
 
     return view('books.index', compact('books'));
 }
@@ -36,7 +36,7 @@ public function store(StoreBookRequest $request)
 
 public function show(string $id)
 {
-    $book = Book::findOrFail($id);
+    $book = Book::with('category')->findOrFail($id);
 
     return view('books.show', compact('book'));
 }
