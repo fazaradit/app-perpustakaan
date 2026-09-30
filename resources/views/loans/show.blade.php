@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Detail Peminjaman</title>
+@extends('layouts.app')
+
+@section('title', 'Detail Peminjaman')
+
+@section('content')
     <style>
-        body { font-family: sans-serif; margin: 40px; max-width: 600px; }
-        table { border-collapse: collapse; width: 100%; margin-top: 16px; }
-        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
         .info th { width: 160px; background: #f3f4f6; }
     </style>
-</head>
-<body>
+
     <h1>Detail Peminjaman</h1>
     <p><a href="{{ route('loans.index') }}">&larr; Kembali ke daftar peminjaman</a></p>
 
@@ -37,11 +33,15 @@
         </tr>
         <tr>
             <th>Status</th>
-            <td>{{ ucfirst($loan['status']) }}</td>
+            <td>
+                <span class="badge badge-{{ $loan['status'] }}">
+                    {{ ucfirst($loan['status']) }}
+                </span>
+            </td>
         </tr>
     </table>
 
-    <h2>Buku yang Dipinjam</h2>
+    <h2 style="margin-top: 30px;">Buku yang Dipinjam</h2>
     <table>
         <thead>
             <tr>
@@ -58,5 +58,4 @@
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection
