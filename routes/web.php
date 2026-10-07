@@ -4,6 +4,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Public
@@ -22,6 +23,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('loans', LoanController::class);
     Route::put('/loans/{id}/kembalikan', [LoanController::class, 'kembalikan'])
         ->name('loans.kembalikan');
+
+    Route::get('/profil', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profil/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
 
     Route::middleware(['admin'])->group(function () {
         Route::resource('categories', CategoryController::class)->except(['show']);
