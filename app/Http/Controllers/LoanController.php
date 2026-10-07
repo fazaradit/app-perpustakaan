@@ -27,9 +27,8 @@ class LoanController extends Controller
     {
         $members = Member::all();
         $books = Book::all();
-        $users = User::all();
 
-        return view('loans.create', compact('members', 'books', 'users'));
+        return view('loans.create', compact('members', 'books'));
     }
 
     /**
@@ -52,13 +51,6 @@ class LoanController extends Controller
         'tanggal_pinjam' => $validated['tanggal_pinjam'],
         'tanggal_kembali' => $validated['tanggal_kembali'],
     ]);
-
-    foreach ($validated['book_ids'] as $bookId) {
-        $loan->loanItems()->create(['book_id' => $bookId]);
-    }
-
-    return redirect()->route('loans.index')
-        ->with('success', 'Transaksi peminjaman berhasil dibuat.');
     }
 
     /**
