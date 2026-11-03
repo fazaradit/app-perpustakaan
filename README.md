@@ -32,6 +32,8 @@ Aplikasi Perpustakaan ini dibangun untuk mempermudah manajemen peminjaman, penge
    ```
 7. Buka browser dan akses aplikasi melalui `http://localhost:8000`.
 
+
+
 ## Perbedaan Model, View, dan Controller (MVC):
 
 Model adalah komponen yang bertanggung jawab untuk berinteraksi dengan database, mengelola data, dan menerapkan aturan bisnis aplikasi. View adalah antarmuka visual (UI) yang bertugas mempresentasikan atau menampilkan data tersebut kepada pengguna akhir. Sedangkan Controller bertindak sebagai penghubung yang menerima permintaan (request) dari pengguna, mengambil atau menyimpan data melalui Model, dan meneruskan hasilnya untuk ditampilkan oleh View. 
